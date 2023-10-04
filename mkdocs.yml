@@ -1,0 +1,23 @@
+site_name: Documentation
+site_url: https://yaptide.github.io/docs/
+repo_url: https://github.com/yaptide/docs
+repo_name: yaptide/docs
+copyright: Copyright &copy; 2023 the Yaptide team
+
+
+theme:
+  name: material
+  features:
+    - content.code.annotate
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+
+nav:
+- Home:
+  - Overview: index.md
+
+plugins:
+- search
+- pdf-export:
+    enabled_if_env: ENABLE_PDF_EXPORT
