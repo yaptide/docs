@@ -11,4 +11,4 @@ Having access to the computing resources (i.e. by registering in the PLGRID plat
 
 Navigate to the [yaptide platform](https://yaptide.github.io) and start defining your simulation.
 
-![Alt text](image.png)
+![Alt text](assets/image.png)
