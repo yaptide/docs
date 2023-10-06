@@ -1,4 +1,4 @@
-site_name: Documentation
+site_name: User Documentation
 site_url: https://yaptide.github.io/docs/
 repo_url: https://github.com/yaptide/docs
 repo_name: yaptide/docs
@@ -16,8 +16,15 @@ theme:
 nav:
 - Home:
   - Overview: index.md
+  - Geometry and materials: geometry.md
+  - Scoring: scoring.md
+  - Particle source and physics: settings.md
+  - Running simulations: running.md
+  - Results inspection: results.md
 
 plugins:
-- search
-- pdf-export:
-    enabled_if_env: ENABLE_PDF_EXPORT
+  - search
+  - git-revision-date-localized
+  - pdf-export:
+      enabled_if_env: ENABLE_PDF_EXPORT
+  - glightbox
