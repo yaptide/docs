@@ -62,7 +62,7 @@ All other properties (like position and dimensions) will be copied as well.
 ![Alt text](image-6.png)
 
 Now lets adjust the dimensions of the newly created figure to 8cm x 8cm x 8cm, as the position can stay the same.
-Also the name needs an update.
+Also the name needs an update to `PhantomBox`.
 Note that the two figures are visible in the 3-D projection window, while only current one is visible in the cross-sections.
 
 ![Alt text](image-7.png)
@@ -70,7 +70,9 @@ Note that the two figures are visible in the 3-D projection window, while only c
 ### Collimator
 
 Finally lets add two cylinders represending outer envelope and inner hole inside the collimator.
-You can use drag operation by clicking and dragging on the 3-D projection. This would help to adjust the view, so the collimator is visible.
+The cylinders have thickness of 1cm and are radius of 4 and 2 cm appropriately.
+Both are centered around (0,0,0) point.
+You can use drag operation by clicking and dragging on the 3-D projection view. This would help to adjust the view, so the collimator is visible.
 
 ![Alt text](image-8.png)
 
@@ -92,7 +94,69 @@ We start by defining first zone from the main box, assigning it the material: Ai
 
 After creating new Zone we should see a following entry in the right-menu.
 New entry appears as well in the list of Zones.
-The newly created zone named "Boolean Zone"Popen has attached by default liquid water attached as a meterial.
-Note that the 
+The newly created zone named "Boolean Zone" has liquid water attached as a meterial by default.
+Note that in "Zone Operations" we see "Not selected" message. This means that the zone has no figures attached.
 
 ![Alt text](image-11.png)
+
+Lets attach the correct figure to the zone by clicking on the "Not selected" message and choosing the "WorldBox" figure.
+
+![Alt text](image-12.png)
+
+Then lets rename the zone to "MainZone" and assign the material to it.
+The material can be selected from the list of materials in the "Simulation" menu ("Material" area).
+After selecting the list of materials you can type few letters ("ai" in our case) and list of materials containing the typed letters will be shown.
+
+![Alt text](image-13.png)
+
+To improve visual properties we adjust the color and set opacity to 0.05:
+![Alt text](image-14.png)
+
+### Water phantom zone
+
+Then we proceed with adding the water phantom zone. Lets add new zone and assign the "PhantomBox" as the figure.
+We rename the zone to "PhantomZone". There is no need to assign the material as we stay with defaul "Liquid Water" material.
+
+![Alt text](image-15.png)
+
+We change the color and inspect the zone in the 3-D projection window.
+
+![Alt text](image-16.png)
+
+There is a caveat with defining the zones by boolean operations. Each point in the space needs to belong to exactly one zone.
+This ensures that each point has exactly one material assigned to it.
+Currently the interior of the phantom box belongs to both zones: "MainZone" and "PhantomZone". Its unclear which material should be assigned to it: air or water.
+Therefore we modify the "MainZone" by subtracting the "PhantomBox" from it.
+This is done by selecting "MainZone" on list of zones and choosing "Subtract" operations:
+
+![Alt text](image-17.png)
+
+Then the "Not selected field" appears
+
+![Alt text](image-18.png)
+
+We choose "PhantomBox" figure there:
+
+![Alt text](image-19.png)
+
+Finally the zone operations for "MainZone" are updated:
+
+![Alt text](image-20.png)
+
+### Collimator zone
+
+The last zone we are going to define is the collimator zone.
+We do it in a similar way as the phantom zone, by adding new zone and assigning the "Collimator" figure to it.
+
+The zone is created by attaching `OuterCylinder` figure and subtracting `InnerCylinder` from it.
+Finally we select `Lead` material for the zone.
+
+![Alt text](image-21.png)
+
+This time again the `MainZone` needs to be updated as the collimator zone is inside it.
+
+![Alt text](image-22.png)
+
+and
+
+![Alt text](image-23.png)
