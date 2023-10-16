@@ -23,9 +23,9 @@ You will be prompted that this operation will overwrite the current project. Sav
 
 ![Alt text](image-1.png)
 
-## Adding new figure
+## Adding figures
 
-### World box
+### Main box
 
 Lets start with adding a box filled with air with dimensions large enough to fit the other object we would like to simulate.
 There are two ways to add a box, either from upper left menu in the Editor tab or by going to Geometry tab in right menu and expanding "Figures" block. Both entries are in the "Editor" window.
@@ -76,3 +76,23 @@ You can use drag operation by clicking and dragging on the 3-D projection. This 
 
 ## Adding new zone
 
+With all the basic figures defined we can use then to construct the zones which will be used in the simulation.
+Here we follow the naming of SHIELD-HIT12A, as Fluka calls the zones "regions".
+
+Lets start with adding the zone which will represent the large box willed with air.
+This can be done in a similar way as adding the figures, either from upper left menu in the Editor tab or by going to Geometry tab in right menu and expanding "Zones" block. Both entries are in the "Editor" window.
+Note that by defaul an automatically created "World Zone" is visible.
+
+![Alt text](image-9.png)
+![Alt text](image-10.png)
+
+### Main zone
+
+We start by defining first zone from the main box, assigning it the material: Air.
+
+After creating new Zone we should see a following entry in the right-menu.
+New entry appears as well in the list of Zones.
+The newly created zone named "Boolean Zone"Popen has attached by default liquid water attached as a meterial.
+Note that the 
+
+![Alt text](image-11.png)
