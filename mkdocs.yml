@@ -28,3 +28,6 @@ plugins:
   - pdf-export:
       enabled_if_env: ENABLE_PDF_EXPORT
   - glightbox
+
+markdown_extensions:
+  - attr_list
