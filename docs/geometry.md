@@ -7,7 +7,13 @@ The geometry is composed of the following elements:
 
 An example geometry is shown below:
 
-![Alt text](assets/geometry_example1.png)
+![Alt text](assets/geometry/geometry_example1.png)
+
+In following sections we will go through generation of simple geometry. It will consist of:
+
+  * water phantom box
+  * lead collimator with 2cm radius hole and 1cm thickness
+  * world filled with air
 
 
 ## Creating new project
@@ -17,11 +23,11 @@ The starting point would be a modification of existing project or creation of a 
 Let us start with a new project as this will be good opportunity to introduce most of the Yaptide features.
 It can be done using "New" button in the upper left part of the Editor window (select Editor in left menu).
 
-![Alt text](image.png){: style="height:150px"}
+![Alt text](assets/geometry/image.png){: style="height:150px"}
 
 You will be prompted that this operation will overwrite the current project. Save your previous work if you want to keep it.
 
-![Alt text](image-1.png)
+![Alt text](assets/geometry/image-1.png)
 
 ## Adding figures
 
@@ -30,8 +36,8 @@ You will be prompted that this operation will overwrite the current project. Sav
 Lets start with adding a box filled with air with dimensions large enough to fit the other object we would like to simulate.
 There are two ways to add a box, either from upper left menu in the Editor tab or by going to Geometry tab in right menu and expanding "Figures" block. Both entries are in the "Editor" window.
 
-![Alt text](image-2.png)
-![Alt text](image-3.png)
+![Alt text](assets/geometry/image-2.png)
+![Alt text](assets/geometry/image-3.png)
 
 Lets create a box spanning from -2 to 10 in z direction and from -5 to 5 in x and y direction.
 In the yaptide we need to provide box center (named "Position") and its dimensions (named "X/Y/Z side").
@@ -39,7 +45,7 @@ In our case the position will be (4,0,0)  and dimensions 12cm x 10cm x 10cm.
 Note that basic dimensions units in yaptide are centimeters.
 Leta also assign a meaningful name to the created figure.
 
-![Alt text](image-4.png)
+![Alt text](assets/geometry/image-4.png)
 
 The figure is created and its cross-sections in YX, XZ and ZY planes visible in the 3 windows in the center of the screen. 
 The 3-D projection is visible as well.
@@ -54,18 +60,18 @@ The dimensions are given in such way that the water phantom is fully contained i
 This time we will use a different technique of adding a figure: we will duplicate the WorldBox and modify the dimensions.
 Such action can be achieved by right click on the WorldBox entry visible in the "Figures" section of the Geometry tab in right menu.
 
-![Alt text](image-5.png)
+![Alt text](assets/geometry/image-5.png)
 
 The newly created figure will inherit the name from the duplicated object. An `_1` suffix will be added to the name to keep all the names unique.
 All other properties (like position and dimensions) will be copied as well.
 
-![Alt text](image-6.png)
+![Alt text](assets/geometry/image-6.png)
 
 Now lets adjust the dimensions of the newly created figure to 8cm x 8cm x 8cm, as the position can stay the same.
 Also the name needs an update to `PhantomBox`.
 Note that the two figures are visible in the 3-D projection window, while only current one is visible in the cross-sections.
 
-![Alt text](image-7.png)
+![Alt text](assets/geometry/image-7.png)
 
 ### Collimator
 
@@ -74,7 +80,7 @@ The cylinders have thickness of 1cm and are radius of 4 and 2 cm appropriately.
 Both are centered around (0,0,0) point.
 You can use drag operation by clicking and dragging on the 3-D projection view. This would help to adjust the view, so the collimator is visible.
 
-![Alt text](image-8.png)
+![Alt text](assets/geometry/image-8.png)
 
 ## Adding new zone
 
@@ -85,8 +91,8 @@ Lets start with adding the zone which will represent the large box willed with a
 This can be done in a similar way as adding the figures, either from upper left menu in the Editor tab or by going to Geometry tab in right menu and expanding "Zones" block. Both entries are in the "Editor" window.
 Note that by defaul an automatically created "World Zone" is visible.
 
-![Alt text](image-9.png)
-![Alt text](image-10.png)
+![Alt text](assets/geometry/image-9.png)
+![Alt text](assets/geometry/image-10.png)
 
 ### Main zone
 
@@ -97,31 +103,31 @@ New entry appears as well in the list of Zones.
 The newly created zone named "Boolean Zone" has liquid water attached as a meterial by default.
 Note that in "Zone Operations" we see "Not selected" message. This means that the zone has no figures attached.
 
-![Alt text](image-11.png)
+![Alt text](assets/geometry/image-11.png)
 
 Lets attach the correct figure to the zone by clicking on the "Not selected" message and choosing the "WorldBox" figure.
 
-![Alt text](image-12.png)
+![Alt text](assets/geometry/image-12.png)
 
 Then lets rename the zone to "MainZone" and assign the material to it.
 The material can be selected from the list of materials in the "Simulation" menu ("Material" area).
 After selecting the list of materials you can type few letters ("ai" in our case) and list of materials containing the typed letters will be shown.
 
-![Alt text](image-13.png)
+![Alt text](assets/geometry/image-13.png)
 
 To improve visual properties we adjust the color and set opacity to 0.05:
-![Alt text](image-14.png)
+![Alt text](assets/geometry/image-14.png)
 
 ### Water phantom zone
 
 Then we proceed with adding the water phantom zone. Lets add new zone and assign the "PhantomBox" as the figure.
 We rename the zone to "PhantomZone". There is no need to assign the material as we stay with defaul "Liquid Water" material.
 
-![Alt text](image-15.png)
+![Alt text](assets/geometry/image-15.png)
 
 We change the color and inspect the zone in the 3-D projection window.
 
-![Alt text](image-16.png)
+![Alt text](assets/geometry/image-16.png)
 
 There is a caveat with defining the zones by boolean operations. Each point in the space needs to belong to exactly one zone.
 This ensures that each point has exactly one material assigned to it.
@@ -129,19 +135,19 @@ Currently the interior of the phantom box belongs to both zones: "MainZone" and 
 Therefore we modify the "MainZone" by subtracting the "PhantomBox" from it.
 This is done by selecting "MainZone" on list of zones and choosing "Subtract" operations:
 
-![Alt text](image-17.png)
+![Alt text](assets/geometry/image-17.png)
 
 Then the "Not selected field" appears
 
-![Alt text](image-18.png)
+![Alt text](assets/geometry/image-18.png)
 
 We choose "PhantomBox" figure there:
 
-![Alt text](image-19.png)
+![Alt text](assets/geometry/image-19.png)
 
 Finally the zone operations for "MainZone" are updated:
 
-![Alt text](image-20.png)
+![Alt text](assets/geometry/image-20.png)
 
 ### Collimator zone
 
@@ -151,12 +157,12 @@ The collimator is a large cylinder (represented by `OuterCylinder` figure with r
 The zone is created by attaching `OuterCylinder` figure and subtracting `InnerCylinder` from it.
 We select `Lead` material for the zone.
 
-![Alt text](image-21.png)
+![Alt text](assets/geometry/image-21.png)
 
 This time again the `MainZone` needs to be updated as the collimator zone is inside it.
 First we subtract the `OuterCylinder` from the `MainZone`:
 
-![Alt text](image-22.png)
+![Alt text](assets/geometry/image-22.png)
 
 Lets note that after this operation the `InnerCylinder` doesn't have a material assigned, it shoult be filled with air.
 This can be done by adding a separate zone and assigning the `InnerCylinder` to it.
@@ -165,10 +171,10 @@ This can be done by adding a separate zone and assigning the `InnerCylinder` to 
 
 We add a new zone and assign the `InnerCylinder` to it.
 
-![Alt text](image-23.png)
+![Alt text](assets/geometry/image-23.png)
 
 No other zones needs to be modified.
 
 Finally our geometry is complete:
 
-![Alt text](image-24.png)
+![Alt text](assets/geometry/image-24.png)
