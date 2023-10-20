@@ -20,7 +20,6 @@ nav:
   - Scoring: scoring.md
   - Particle source and physics: settings.md
   - Running simulations: running.md
-  - Results inspection: results.md
 
 plugins:
   - search
