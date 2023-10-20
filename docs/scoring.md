@@ -10,7 +10,7 @@ In addition, there are several optional items:
 
   * Scoring filter, which can be attached to some quantities, like score the quantities for protons only
   * Differential modifiers, i.e. allowing to score quantities in different energy bins
-  * Other settings, rescaling factors or custom material definitions
+  * Other settings, rescaling factors or custom material definitions    
 
 In the section below we will add couple of items to demontrate the scoring capabilities of Yaptide.
 
