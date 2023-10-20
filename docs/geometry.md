@@ -29,6 +29,18 @@ You will be prompted that this operation will overwrite the current project. Sav
 
 ![Alt text](assets/geometry/image-1.png)
 
+New project can get a name and description. The name can be adjusted by double click the title panel in the Editor window.
+
+![Alt text](assets/geometry/image-title1.png)
+
+another way is the right click on the project name in the title menu and choosing "Rename" option.
+
+![Alt text](assets/geometry/image-desc1.png)
+
+This way the description can be adjusted as well:
+
+![Alt text](assets/geometry/image-desc2.png)
+
 ## Adding figures
 
 ### Main box
