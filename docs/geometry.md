@@ -145,18 +145,30 @@ Finally the zone operations for "MainZone" are updated:
 
 ### Collimator zone
 
-The last zone we are going to define is the collimator zone.
-We do it in a similar way as the phantom zone, by adding new zone and assigning the "Collimator" figure to it.
+We are going to define the collimator zone now.
+The collimator is a large cylinder (represented by `OuterCylinder` figure with radius 4cm) with a hole inside (represented by `InnerCylinder` figure, radius 2cm)
 
 The zone is created by attaching `OuterCylinder` figure and subtracting `InnerCylinder` from it.
-Finally we select `Lead` material for the zone.
+We select `Lead` material for the zone.
 
 ![Alt text](image-21.png)
 
 This time again the `MainZone` needs to be updated as the collimator zone is inside it.
+First we subtract the `OuterCylinder` from the `MainZone`:
 
 ![Alt text](image-22.png)
 
-and
+Lets note that after this operation the `InnerCylinder` doesn't have a material assigned, it shoult be filled with air.
+This can be done by adding a separate zone and assigning the `InnerCylinder` to it.
+
+### Air inside collimator
+
+We add a new zone and assign the `InnerCylinder` to it.
 
 ![Alt text](image-23.png)
+
+No other zones needs to be modified.
+
+Finally our geometry is complete:
+
+![Alt text](image-24.png)
