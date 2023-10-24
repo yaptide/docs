@@ -26,6 +26,7 @@ plugins:
   - git-revision-date-localized
   - pdf-export:
       enabled_if_env: ENABLE_PDF_EXPORT
+      combined: true
   - glightbox
 
 markdown_extensions:

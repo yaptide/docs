@@ -54,3 +54,31 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@v2
+
+  pdf:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+            python-version: '3.11'
+      - name: Install dependencies for documentation
+        run: pip install -r requirements-docs.txt
+      - name: Build site
+        run: mkdocs build
+        env:
+          ENABLE_PDF_EXPORT: 1
+      - name: Check if pdf created in site/pdf/combined.pdf
+        run: test -f site/pdf/combined.pdf
+      - name: Upload artifact if on master
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v2
+        with:
+          name: pdf
+          path: 'site/pdf/combined.pdf'
