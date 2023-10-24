@@ -76,3 +76,8 @@ jobs:
           ENABLE_PDF_EXPORT: 1
       - name: Check if pdf created in site/pdf/combined.pdf
         run: test -f site/pdf/combined.pdf
+      - name: Upload artifact if on master
+        uses: actions/upload-artifact@v2
+        with:
+          name: pdf
+          path: 'site/pdf/combined.pdf'
