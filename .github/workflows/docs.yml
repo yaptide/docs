@@ -74,3 +74,5 @@ jobs:
         run: mkdocs build
         env:
           ENABLE_PDF_EXPORT: 1
+      - name: Check if pdf created in site/pdf/combined.pdf
+        run: test -f site/pdf/combined.pdf
