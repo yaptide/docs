@@ -78,7 +78,7 @@ jobs:
         run: test -f site/pdf/combined.pdf
       - name: Upload artifact if on master
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pdf
           path: 'site/pdf/combined.pdf'
