@@ -2,7 +2,7 @@ site_name: User Documentation
 site_url: https://yaptide.github.io/docs/
 repo_url: https://github.com/yaptide/docs
 repo_name: yaptide/docs
-copyright: Copyright &copy; 2023 the Yaptide team
+copyright: Copyright &copy; 2023-2024 the Yaptide team
 
 
 theme:
