@@ -5,41 +5,53 @@
 We assume that you have already registered and logged in to the platform.
 To run the simulation you need to have proper project loaded in the editor window. 
 
-![Alt text](assets/running/image.png)
+![Simulation set up](assets/running/simulation_set_up.png)
 
-To run the simulation please select `Simulation` item in the left menu. You will be presented with list of already completed simulations:
+To run the simulation, click `RUN` in the title bar, or select Simulation page from the Navigation Bar on the left.
 
-![Alt text](assets/running/image-1.png)
+## Simulations Page
 
-The simulation can be started by clicking on `RUN NEW SIMULATION` button which will present couple of options.
+The Simulations Page consists of 3 main sections:
+
+1. Simulations Archive, where all previously run simulations are presented in paginated view
+2. Run new simulation form which presents different ways to run the simulation currently loaded to Editor
+3. Last 5 simulations, which always displays the 5 most recent simulations
+
+> [!NOTE] For convenience, the sidebar with sections 2. and 3. is pinned to Simulations, Input files, and Results pages.
+> You can run and see recent simulations from each of these pages.
+
+![Simulations Page](assets/running/simulations_page.png)
+
+## Running the simulation
 
 You could choose where to run simulation:
 
- - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15 cores machine in the C3 PLGRID Cloud)
+ - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15 cores machine in the C3 PLGrid Cloud)
  - as *BATCH RUN* in the HPC resources (by submitting the job to the SLURM batch management system in Ares supercomputer)
 
- The direct run may have much shorter time to start the simulation, but the parallelism is limited to 15 cores. The batch run may take longer to start the simulation, but the parallelism is limited only by the resources available in the HPC cluster.
-
-![Alt text](assets/running/image-2.png)
+ The direct run may have much shorter time to start the simulation, but the parallelism is limited to 15 cores.
+ The batch run may take longer to start the simulation, but the parallelism is limited only by the resources available in the HPC cluster.
 
 ## Direct run
 
-### Submission 
-Lets start by submitting the simulation with 15 cores, selecting proper number of tasks and `DIRECT RUN` option. Press start to submit the simulation.
+Direct run is the default option. In the form, you can change the name (doesn't need to be the same as the project title),
+number of tasks, and overwrite the number of primary particles (the default is specified under SETTINGS in Editor page).
 
-![Alt text](assets/running/image-7.png)
+![Direct Run](assets/running/direct_run.png)
 
-You will see a new entry in the list of simulations with status `PENDING`. The simulation will start automatically when the resources will be available.
+When the parameters are set, click `START SIMULATION` to send it to the YAPTIDE server.
+After successful submission, the simulation is in PENDING state.
+The simulation will start automatically when the resources will be available, then it will change to RUNNING state,
+and you will be able to see the progress of the simulation by observing the progress bar.
 
-![Alt text](assets/running/image-3.png)
+![Pending state](assets/running/direct_run_pending.png)
+![Running state](assets/running/direct_run_running.png)
 
-Once the simulation is running, the status will change to `RUNNING` and you will be able to see the progress of the simulation by observing the progress bar of each task.
+The simulation is also present in the pinned "Last 5 simulations" section.
 
-![Alt text](assets/running/image-4.png)
+![Pinned to Last 5 simulations section](assets/running/direct_run_queue.png)
 
-You can see that some of the tasks may be already completed (green), while others are running (dark).
-
-![Alt text](assets/running/image-5.png)
+When the simulation finishes, it will automatically navigate to Results page and display the results.
 
 ### Viewing results
 
@@ -81,6 +93,8 @@ X projection reveals that with 10^4 primaries statitics is not enough:
 ![Alt text](assets/running/image-19.png)
 
 ## Batch run
+
+![Batch Run](assets/running/batch_run.png)
 
 When executing simulation with 10^4 primaries and 15 cores, the process completed in 37 seconds. To obtain better statistics we will try to run 10^6 primaries on 100 parallel tasks. This is not possible with direct run, so we will use batch run.
 
