@@ -63,7 +63,7 @@ In the following sections we will go through generation of simple geometry. It w
 ### World filled with air
 
 Lets start with adding a box filled with air with dimensions large enough to fit the other object we would like to simulate.
-There are two ways to add a box, either selecting `Object > Box` in Menu Bar, or clicking `+ Box` in FIGURES section in GEOMETRY tab.
+There are two ways to add a box, either selecting `Object > Box` in Menu Bar, or clicking `+ BOX` in FIGURES section in GEOMETRY tab.
 
 ![Add Figure from Object Menu](assets/geometry/menu_object_add.png)
 
