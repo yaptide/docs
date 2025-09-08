@@ -17,7 +17,8 @@ The Simulations Page consists of 3 main sections:
 2. Run new simulation form which presents different ways to run the simulation currently loaded to Editor
 3. Last 5 simulations, which always displays the 5 most recent simulations
 
-> [!NOTE] For convenience, the sidebar with sections 2. and 3. is pinned to Simulations, Input files, and Results pages.
+> [!NOTE]
+> For convenience, the sidebar with sections 2. and 3. is pinned to Simulations, Input files, and Results pages.
 > You can run and see recent simulations from each of these pages.
 
 ![Simulations Page](assets/running/simulations_page.png)
@@ -95,4 +96,5 @@ The job pops up in the queue, and we can use the application in the meantime.
 
 ![Queued Batch Run](assets/running/batch_run_queue.png)
 
-> [!NOTE] Large Batch Jobs may stay longer in `PENDING` state, waiting for the resources to be available.
+> [!NOTE]
+> Large Batch Jobs may stay longer in `PENDING` state, waiting for the resources to be available.

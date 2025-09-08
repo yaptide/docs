@@ -47,7 +47,7 @@ This time the bins are defined in Y and Z directions, so we set 100 bins in Y an
 
 ## Scoring output
 
-To define scoring output we switch to SCORING tab i the right menu of Editor view.
+To define scoring output we switch to SCORING tab in the right menu of Editor view.
 
 ![Scoring tab](assets/scoring/scoring_tab.png)
 
@@ -119,4 +119,5 @@ Then we choose `Protons` from the drop-down list of filters.
 
 ![Alt text](assets/scoring/apply_filter.png)
 
-> [!NOTE] For SHIELD-HIT12A specifically, you can use `+ PARTICLE FILTER` and select Protons to get the same filter effect.
+> [!NOTE]
+> For SHIELD-HIT12A specifically, you can use `+ PARTICLE FILTER` and select Protons to get the same filter effect.

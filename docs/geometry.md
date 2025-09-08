@@ -125,7 +125,8 @@ or by going to Geometry tab in right menu and expanding ZONES section in GEOMETR
 ![Add Boolean Zone from Object Menu](assets/geometry/menu_boolean_zone_add.png)
 ![Add Boolean Zone from ZONES section](assets/geometry/boolean_zone_add.png)
 
-> [!NOTE] A special "World Zone" which represents the whole simulation environment is defined by default, and can't be removed.
+> [!NOTE]
+> A special "World Zone" which represents the whole simulation environment is defined by default, and can't be removed.
 
 ### Main zone
 
@@ -134,7 +135,8 @@ We start by defining first zone from the main box, and setting its name to "Main
 Zones describe a volume of space by combining multiple figures using boolean operations to define shape,
 and define physical material that the volume is made of.
 
-> [!WARN] Defining a volume operations requires special considerations. Each volume of space should belong to exactly
+> [!IMPORTANT]
+> Defining a volume operations requires special considerations. Each volume of space should belong to exactly
 > one Zone so that it is clear for the simulator which material the particle is going through.
 > This means that the volume enclosing another volume with different material needs to have a cutout that will fit the inner volume.
 
@@ -150,14 +152,14 @@ Zones are visualized in the 3D view by solid colors. We can see the cutouts for 
 
 ![Zone in 3D view](assets/geometry/zone_vis.png)
 
-> [!NOTE] To better see what's inside the zone, you can set the Opacity under MATERIAL section.
-> 
+> [!NOTE]
+> To better see what's inside the zone, you can set the Opacity under MATERIAL section.
 > ![Custom opacity](assets/geometry/custom_opacity.png)
 
 ### Water phantom zone
 
 We repeat the same thing for water phantom zone. Let's add new zone and assign the "PhantomBox" as the figure.
-There is no need to assign the material as we stay with defaul "Liquid Water" material.
+There is no need to assign the material as we stay with default "Liquid Water" material.
 
 Under the MATERIAL section, instead of Opacity, we change the color and inspect the zone in the 3D view.
 
