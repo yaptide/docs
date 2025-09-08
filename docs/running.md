@@ -59,52 +59,40 @@ Once all tasks are completed, the status of the simulation will change to `COMPL
 You will be automatically redirected to the `Results` tab in the left menu.
 First you will see a depth dose profile for the `AlongBeamAxis` scoring geometry.
 
-![Alt text](assets/running/image-6.png)
+![Results of a finished simulation](assets/running/finished_results.png)
 
-The plots are interactive, using mouse coursor you can zoom selected fragments of the plot:
+The plots are interactive, using mouse cursor you can zoom selected fragments of the plot:
 
-![Alt text](assets/running/image-8.png)
+![Selecting fragments to zoom](assets/running/zoom_selected.png)
 
-![Alt text](assets/running/image-9.png)
+![Alt text](assets/running/zoomed.png)
 
-Both axis scale can be changed to logarithmic by right click in the axis area:
+To revert the view you can click in the plot area and disable the logarithmic scale and zooming.
+Both axes scale can be changed to logarithmic by right click in the axis area.
 
-![Alt text](assets/running/image-10.png)
-![Alt text](assets/running/image-11.png)
-
-To revert the view you can click in the plot area and disable the logarithmic scale and zooming:
-![Alt text](assets/running/image-12.png)
+![Changing plot settings](assets/running/plot_settings.gif)
 
 Plots data can be saved to CSV file by clicking on the `Export graph to CSV` button:
-![Alt text](assets/running/image-13.png)
-![Alt text](assets/running/image-14.png)
+![Alt text](assets/running/export_csv.png)
 
 The YZ profile can be seen by selecting proper Output item. As we see collimator is stopping most of the protons on radius larger than 2 cm.
 
-![Alt text](assets/running/image-15.png)
+![Alt text](assets/running/collimator_results.png)
 
-Two dimensional plots can be also inspected by plotting the profiles. On right click in the blue colored are we see proper menu:
+Two-dimensional plots can be also inspected by plotting the profiles. On right click in the blue colored are we see proper menu:
 
-![Alt text](assets/running/image-16.png)
-![Alt text](assets/running/image-17.png)
-![Alt text](assets/running/image-18.png)
-
-X projection reveals that with 10^4 primaries statitics is not enough:
-![Alt text](assets/running/image-19.png)
+![Alt text](assets/running/profiles.gif)
 
 ## Batch run
 
+If the plots need more precision, then we need to rerun the simulation with more primaries. We can quickly reach the Run new simulation form
+and increase the number. This will make the simulation run take much more time. For the case of computationally expensive simulations,
+we can utilize the Batch Run.
+
 ![Batch Run](assets/running/batch_run.png)
 
-When executing simulation with 10^4 primaries and 15 cores, the process completed in 37 seconds. To obtain better statistics we will try to run 10^6 primaries on 100 parallel tasks. This is not possible with direct run, so we will use batch run.
+The job pops up in the queue, and we can use the application in the meantime.
 
-![Alt text](assets/running/image-20.png)
+![Queued Batch Run](assets/running/batch_run_queue.png)
 
-The jobs may stay longer in `PENDING` state, waiting for the resources to be available.
-
-![Alt text](assets/running/image-22.png)
-
-once the simulation is running, the status will change to `RUNNING` and you will be able to see the progress of the simulation by observing the progress bar of each task.
-The estimated time of each tasks may be seen by moving mouse cursor over the progress bar.
-
-![Alt text](assets/running/image-23.png)
+> [!NOTE] Large Batch Jobs may stay longer in `PENDING` state, waiting for the resources to be available.
