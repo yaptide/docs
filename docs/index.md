@@ -36,5 +36,6 @@ Full version is hosted in the PlGrid infrastructure and requires registration an
 
 You'll be able to execute your simulations in the cloud (few machines in C3 PlGrid Cloud) or HPC resources (Ares supercomputer in ACK Cyfronet). 
 
-> [!NOTE] The platform requires registration and allows the access for selected group of users
+> [!NOTE]
+> The platform requires registration and allows the access for selected group of users
 > with account in the PLGrid infrastructure. To register in the platform, please contact the administrator.
