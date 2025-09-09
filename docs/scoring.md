@@ -2,7 +2,7 @@
 
 Scoring requires user to define several items:
 
-  * Scoring geometry, here named as detector
+  * Scoring geometry, here named "detector"
   * Scoring quantity
   * Scoring output, which is a group of quantities scored in the same detectors
 
@@ -24,8 +24,8 @@ Detector can be added either by selecting `Object > Detector` in Menu Bar or cli
 
 ### Narrow cylinder along the beam axis
 
-Lets start with adding a cylinder with radius of 1cm and length of 12cm along the beam axis, spanning from -2cm to 12cm along Z axis.
-By pressing "Add detector" button a new item will be added to the list of detectors. Change the settings as follows:
+Let's start with adding a cylinder with radius of 1cm and length of 12cm along the beam axis, spanning from -2cm to 12cm along Z axis.
+By pressing `+ DETECTOR` button a new item will be added to the list of detectors. Change the settings as follows:
 
 - Rename the detector to `AlongBeamAxis`.
 - Set the position in PLACEMENT section. To get correct span we set center to (0,0,4) cm.
@@ -34,7 +34,7 @@ By pressing "Add detector" button a new item will be added to the list of detect
 
 ![Setting up new detector](assets/scoring/detector_details.png)
 
-When selected the detector should be visible in the 3D and cross-section views.
+When selected, the detector should be visible in the 3D and cross-section views.
 
 ### Slab in YZ plane
 
@@ -93,9 +93,10 @@ on the fluence of protons. Such thickness should be enough to stop most complete
 To score the fluence, we need to change the scoring quantity to `Fluence` and add a meaningful name.
 We select default quantity in `YZSlab` item, define proper name and quantity type:
 
-Note that we can type some letters to get list of available quantities filtered by the typed letters.
-
 ![Defining Fluence quantity](assets/scoring/quantity_fluence.png)
+
+> [!NOTE]
+> Quantity type supports typing letters to filter the list of available quantities.
 
 Such quantity won't be very useful, as it will show the fluence of all particles, including neutrons and other charged particles.
 To limit the scoring to protons only, we need to add a filter.

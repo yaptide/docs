@@ -27,7 +27,7 @@ The Simulations Page consists of 3 main sections:
 
 You could choose where to run simulation:
 
- - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15 cores machine in the C3 PLGrid Cloud)
+ - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15 core machine in the C3 PLGrid Cloud)
  - as *BATCH RUN* in the HPC resources (by submitting the job to the SLURM batch management system in Ares supercomputer)
 
  The direct run may have much shorter time to start the simulation, but the parallelism is limited to 15 cores.

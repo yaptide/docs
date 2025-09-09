@@ -2,7 +2,7 @@
 
 ![Geometry Page](assets/geometry/geometry.png)
 
-Geometry definition varies between different types of simulation software. For simulators using Constructive Solid Geometry (CSG), FLUKA and SHIELDHIT-12A,
+Geometry definition varies between different types of simulation software. For simulators using Constructive Solid Geometry (CSG) - FLUKA and SHIELDHIT-12A,
 shapes are defined by set of primitive Figures (boxes, cylinders, spheres) joined together by boolean operators. The order of operators to apply is defined
 within a Zone.
 
@@ -73,7 +73,7 @@ Lets create a box spanning from -2 to 10 in z direction and from -5 to 5 in x an
 We do this by providing box center (named "Position") and its dimensions (named "X/Y/Z side").
 In our case the position will be (4,0,0)  and dimensions 12cm x 10cm x 10cm.
 Note that basic dimensions units in YAPTIDE are centimeters.
-Leta also assign a meaningful name to the created figure.
+Let's also assign a meaningful name to the created figure.
 
 ![Object details](assets/geometry/object_details.png)
 

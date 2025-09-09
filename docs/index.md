@@ -20,7 +20,7 @@ Demo version of the platform is hosted on the GitHub pages as [yaptide.github.io
 This version is free for use and doesn't require to register or login.
 In demo version the platform works as an online editor for simulation input and results browser. The following functionalities are available:
 
-  - defining and visualizing of simulation geometry and materials
+  - defining and visualizing simulation geometry and materials
   - defining scoring geometry, scored quantities and advanced scoring options (like filtering)
   - defining particle source
   - specifying simulation settings (like physics parameters)
