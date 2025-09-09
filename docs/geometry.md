@@ -128,25 +128,30 @@ or by going to Geometry tab in right menu and expanding ZONES section in GEOMETR
 > [!NOTE]
 > A special "World Zone" which represents the whole simulation environment is defined by default, and can't be removed.
 
-### Main zone
-
-We start by defining first zone from the main box, and setting its name to "MainZone", just like for figures.
+### Air zones
 
 Zones describe a volume of space by combining multiple figures using boolean operations to define shape,
 and define physical material that the volume is made of.
 
 > [!IMPORTANT]
-> Defining a volume operations requires special considerations. Each volume of space should belong to exactly
+> Defining zone operations requires special considerations. Each volume of space should belong to exactly
 > one Zone so that it is clear for the simulator which material the particle is going through.
 > This means that the volume enclosing another volume with different material needs to have a cutout that will fit the inner volume.
 
-Let's expand ZONE OPERATIONS and define the MainZone.
-The MainZone is the Air that fills the empty space around the phantom and the collimator.
-We need to subtract both the phantom and the collimator.
-- For the phantom, it only requires subtracting the phantom figure
-- For the collimator, we need to subtract the whole outer cylinder, and add back the inner cylinder
+Let's expand ZONE OPERATIONS and define the MainAirZone and CollimatorAirZone.
+Together they represent the air that fills the empty space around the phantom and the collimator.
+To get precisely the air volume, we need to subtract both the phantom and the collimator.
+- For the phantom, it only requires subtracting the phantom figure.
+- For the collimator, we need to subtract the whole outer cylinder, and add back the inner cylinder. The "adding back"
+is performed with second zone.
+
+Defining the MainAirZone is shown below:
 
 ![Defining zone operations for MainZone](assets/geometry/zone_operations.gif)
+
+CollimatorAirZone is then simply:
+
+![Collimator air zone](assets/geometry/collimator_air_zone.png)
 
 Zones are visualized in the 3D view by solid colors. We can see the cutouts for the phantom and the collimator.
 
