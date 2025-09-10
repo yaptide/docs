@@ -16,7 +16,7 @@ In the section below we will add a couple of items to demonstrate the scoring ca
 
 ## Detectors
 
-Detector can be added either by selecting `Object > Detector` in Menu Bar or clicking `+ DETECTOR` in DETECTORS section in GEOMETRY tab.
+Detectors can be added either by selecting `Object > Detector` in Menu Bar or clicking `+ DETECTOR` in DETECTORS section in GEOMETRY tab.
 
 ![Adding a detector from menu bar](assets/scoring/menu_detector_add.png)
 

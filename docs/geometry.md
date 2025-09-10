@@ -106,7 +106,7 @@ Note that the two figures are visible in the 3-D projection window, while only c
 ### Collimator
 
 Finally lets add two cylinders representing outer envelope and inner hole inside the collimator.
-The cylinders have thickness of 1cm and are radius of 4 and 2 cm appropriately.
+The cylinders have thickness of 1cm and are radius of 4 and 2 cm respectively.
 Both are centered around (0,0,0) point.
 You can use drag operation by clicking and dragging on the 3-D projection view. This would help to adjust the view, so the collimator is visible.
 
@@ -134,7 +134,7 @@ Zones describe a volume of space by combining multiple figures using boolean ope
 and define physical material that the volume is made of.
 
 > [!IMPORTANT]
-> Defining zone operations requires special considerations. Each volume of space should belong to exactly
+> Defining zone operations requires special considerations. Each point in space should belong to exactly
 > one Zone so that it is clear for the simulator which material the particle is going through.
 > This means that the volume enclosing another volume with different material needs to have a cutout that will fit the inner volume.
 

@@ -27,7 +27,7 @@ The Simulations Page consists of 3 main sections:
 
 You could choose where to run simulation:
 
- - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15 core machine in the C3 PLGrid Cloud)
+ - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15-core machine in the C3 PLGrid Cloud)
  - as *BATCH RUN* in the HPC resources (by submitting the job to the SLURM batch management system in Ares supercomputer)
 
  The direct run may have much shorter time to start the simulation, but the parallelism is limited to 15 cores.
@@ -80,7 +80,7 @@ The YZ profile can be seen by selecting proper Output item. As we see collimator
 
 ![Alt text](assets/running/collimator_results.png)
 
-Two-dimensional plots can be also inspected by plotting the profiles. On right click in the blue colored are we see proper menu:
+Two-dimensional plots can be also inspected by plotting the profiles. On right click in the blue colored area we see proper menu:
 
 ![Alt text](assets/running/profiles.gif)
 
