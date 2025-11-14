@@ -64,14 +64,14 @@ In the following sections we will go through generation of simple geometry. It w
 
     ### World filled with air
 
-    Lets start with adding a box filled with air with dimensions large enough to fit the other object we would like to simulate.
+    Let's start with adding a box filled with air with dimensions large enough to fit the other object we would like to simulate.
     There are two ways to add a box, either selecting `Object > Box` in Menu Bar, or clicking `+ BOX` in FIGURES section in GEOMETRY tab.
 
     ![Add Figure from Object Menu](assets/geometry/menu_object_add.png)
 
     ![Add Figure from FIGURES section](assets/geometry/figures_add.png)
 
-    Lets create a box spanning from -2 to 10 in z direction and from -5 to 5 in x and y direction.
+    Let's create a box spanning from -2 to 10 in z direction and from -5 to 5 in x and y direction.
     We do this by providing box center (named "Position") and its dimensions (named "X/Y/Z side").
     In our case the position will be (4,0,0)  and dimensions 12cm x 10cm x 10cm.
     Note that basic dimensions units in YAPTIDE are centimeters.
@@ -97,7 +97,7 @@ In the following sections we will go through generation of simple geometry. It w
 
     ![Duplicated WorldBox](assets/geometry/duplicated.png)
 
-    Now lets adjust the dimensions of the newly created figure to 8cm x 8cm x 8cm, as the position can stay the same.
+    Now let's adjust the dimensions of the newly created figure to 8cm x 8cm x 8cm, as the position can stay the same.
     Also the name needs an update to `PhantomBox`.
     Note that the two figures are visible in the 3-D projection window, while only current one is visible in the cross-sections.
 
@@ -105,7 +105,7 @@ In the following sections we will go through generation of simple geometry. It w
 
     ### Collimator
 
-    Finally lets add two cylinders representing outer envelope and inner hole inside the collimator.
+    Finally, let's add two cylinders representing the outer envelope and inner hole inside the collimator.
     The cylinders have thickness of 1cm and are radius of 4 and 2 cm respectively.
     Both are centered around (0,0,0) point.
     You can use drag operation by clicking and dragging on the 3-D projection view. This would help to adjust the view, so the collimator is visible.
@@ -117,7 +117,7 @@ In the following sections we will go through generation of simple geometry. It w
     With the figures defined above, we can construct the zones which will be used in the simulation.
     Here we follow the naming of SHIELD-HIT12A, as Fluka calls the zones "regions".
 
-    Lets start with adding a zone which will represent the large box filled with air.
+    Let's start with adding a zone which will represent the large box filled with air.
     This can be done in a similar way as adding the figures, either from upper left menu in the Editor tab
     or by going to Geometry tab in right menu and expanding ZONES section in GEOMETRY tab.
 

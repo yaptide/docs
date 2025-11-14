@@ -91,7 +91,7 @@ We can see that the output has already a first scoring quantity added, named `Qu
     Under development
 
 === "🚧 Geant4"
-    
+
     Under development
 
 ### Fluence profile in YZ plane
@@ -118,8 +118,8 @@ on the fluence of protons. Such thickness should be enough to stop most complete
 !!! note
     Quantity type supports typing letters to filter the list of available quantities.
 
-Often, scoring a quantity for all passing particles won't be very useful
-In this case, To limit the scoring to protons only, we need to add a filter.
+Often, scoring a quantity for all passing particles won't be very useful.
+In this case, to limit the scoring to protons only, we need to add a filter.
 
 #### Scoring filter
 
