@@ -2,8 +2,12 @@
 
 ## Overview
 
-We assume that you have already registered and logged in to the platform.
-To run the simulation you need to have proper project loaded in the editor window. 
+!!! info
+    This part of the application may not be available in Demo Mode. If you are working with SHIELD-HIT12A or FLUKA,
+    you need to be logged in to the platform. We assume that you have already registered and logged in, if required to do so.
+    For Geant4, no additional steps are required.
+
+To run the simulation you need to have a project loaded in the editor window. 
 
 ![Simulation set up](assets/running/simulation_set_up.png)
 
@@ -17,32 +21,53 @@ The Simulations Page consists of 3 main sections:
 2. Run new simulation form which presents different ways to run the simulation currently loaded to Editor
 3. Last 5 simulations, which always displays the 5 most recent simulations
 
-> [!NOTE]
-> For convenience, the sidebar with sections 2. and 3. is pinned to Simulations, Input files, and Results pages.
-> You can run and see recent simulations from each of these pages.
+!!! note
+    For convenience, the sidebar with sections 2. and 3. is pinned to Simulations, Input files, and Results pages.
+    You can run and see recent simulations from each of these pages.
 
 ![Simulations Page](assets/running/simulations_page.png)
 
 ## Running the simulation
 
-You could choose where to run simulation:
+=== "SHIELD-HIT12A / FLUKA"
 
- - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15-core machine in the C3 PLGrid Cloud)
- - as *BATCH RUN* in the HPC resources (by submitting the job to the SLURM batch management system in Ares supercomputer)
+    You may choose how to run the simulation:
 
- The direct run may have much shorter time to start the simulation, but the parallelism is limited to 15 cores.
- The batch run may take longer to start the simulation, but the parallelism is limited only by the resources available in the HPC cluster.
+    - as *DIRECT RUN* in the dedicated cloud resources (currently limited to 15-core machine in the C3 PLGrid Cloud)
+    - as *BATCH RUN* in the HPC resources (by submitting the job to the SLURM batch management system in Ares supercomputer)
 
-## Direct run
+    The direct run will take less time to start the simulation, but the parallelism is limited to 15 cores.
+    The batch run will take longer to start the simulation, but the parallelism is limited only by the resources available in the HPC cluster.
 
-Direct run is the default option. In the form, you can change the name (doesn't need to be the same as the project title),
-number of tasks, and overwrite the number of primary particles (the default is specified under SETTINGS in Editor page).
+    ## Direct run
 
-![Direct Run](assets/running/direct_run.png)
+    Direct run is the default option. In the form, you can change the name (doesn't need to be the same as the project title),
+    number of tasks, and overwrite the number of primary particles (the default is specified under SETTINGS in Editor page).
+
+    ![Direct Run](assets/running/direct_run.png)
+
+    ## Batch run
+
+    If the plots need more precision, then we need to rerun the simulation with more primaries. We can quickly reach the Run new simulation form
+    and increase the number. This will make the simulation run take much more time. For the case of computationally expensive simulations,
+    we can utilize the Batch Run.
+
+    ![Batch Run](assets/running/batch_run.png)
+
+    The job pops up in the queue, and we can use the application in the meantime.
+
+    ![Queued Batch Run](assets/running/batch_run_queue.png)
+
+    !!! note
+        Large Batch Jobs may stay longer in `PENDING` state, waiting for the resources to be available.
+
+=== "🚧 Geant4"
+
+    Under development
 
 When the parameters are set, click `START SIMULATION` to send it to the YAPTIDE server.
 After successful submission, the simulation is in PENDING state.
-The simulation will start automatically when the resources will be available, then it will change to RUNNING state,
+The simulation will start automatically when the resources are available, then it will change to RUNNING state,
 and you will be able to see the progress of the simulation by observing the progress bar.
 
 ![Pending state](assets/running/direct_run_pending.png)
@@ -83,18 +108,3 @@ The YZ profile can be seen by selecting proper Output item. As we see collimator
 Two-dimensional plots can be also inspected by plotting the profiles. On right click in the blue colored area we see proper menu:
 
 ![Alt text](assets/running/profiles.gif)
-
-## Batch run
-
-If the plots need more precision, then we need to rerun the simulation with more primaries. We can quickly reach the Run new simulation form
-and increase the number. This will make the simulation run take much more time. For the case of computationally expensive simulations,
-we can utilize the Batch Run.
-
-![Batch Run](assets/running/batch_run.png)
-
-The job pops up in the queue, and we can use the application in the meantime.
-
-![Queued Batch Run](assets/running/batch_run_queue.png)
-
-> [!NOTE]
-> Large Batch Jobs may stay longer in `PENDING` state, waiting for the resources to be available.
