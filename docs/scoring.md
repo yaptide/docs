@@ -73,16 +73,26 @@ We repeat the steps for the slab detector.
 
 ### Depth dose profile
 
-Lets start by defining a scoring for depth dose profile in cylinder detector along the beam axis.
+Let's start by defining a scoring for depth dose profile in cylinder detector along the beam axis.
 This can be done by expanding the `AlongBeamAxis` item in the Outputs list by clicking on `+` icon.
 We can see that the output has already a first scoring quantity added, named `Quantity`.
 
-![Default quantity](assets/scoring/default_quantity.png)
+=== "SHIELD-HIT12A"
 
-By default scoring of dose was selected, so we stay with this, just adding a meaningful name: `Dose`.
+    ![Default quantity](assets/scoring/default_quantity.png)
 
-We are planning to simulate the interaction of beam of protons with the phantom, and with such scoring we could see the
-characteristic Bragg peak.
+    By default, scoring of dose was selected, so we stay with this, just adding a meaningful name: `Dose`.
+
+    We are planning to simulate the interaction of beam of protons with the phantom, and with such scoring we could see the
+    characteristic Bragg peak.
+
+=== "🚧 FLUKA"
+
+    Under development
+
+=== "🚧 Geant4"
+
+    Under development
 
 ### Fluence profile in YZ plane
 
@@ -90,35 +100,55 @@ Since in our geometry we applied a 1 cm thick collimator made of lead, we would 
 on the fluence of protons. Such thickness should be enough to stop most completely 70 MeV protons
 (the CSDA range in lead at that kinetic energy is about 8mm).
 
-To score the fluence, we need to change the scoring quantity to `Fluence` and add a meaningful name.
-We select default quantity in `YZSlab` item, define proper name and quantity type:
+=== "SHIELD-HIT12A"
 
-![Defining Fluence quantity](assets/scoring/quantity_fluence.png)
+    To score the fluence, we need to change the scoring quantity to `Fluence` and add a meaningful name.
+    We select default quantity in `YZSlab` item, define proper name and quantity type:
 
-> [!NOTE]
-> Quantity type supports typing letters to filter the list of available quantities.
+    ![Defining Fluence quantity](assets/scoring/quantity_fluence.png)
 
-Such quantity won't be very useful, as it will show the fluence of all particles, including neutrons and other charged particles.
-To limit the scoring to protons only, we need to add a filter.
+=== "🚧 FLUKA"
+
+    Under development
+
+=== "🚧 Geant4"
+
+    Under development
+
+!!! note
+    Quantity type supports typing letters to filter the list of available quantities.
+
+Often, scoring a quantity for all passing particles won't be very useful.
+In this case, to limit the scoring to protons only, we need to add a filter.
 
 #### Scoring filter
 
-We define a filter in the FILTERS section of the SCORING tab.
-By pressing `+ FILTER` (or `+ CUSTOM FILTER` in SHIELD-HIT), new filter will be added to the list of filters.
-We adjust the name of the filter to `Protons` and add two rules to define proton (A=1 and Z=1):
-First rule is added by clicking `ADD RULE` button and then selecting `Z` and `=` from the drop-down lists.
-Then we type `1` in the text field.
+=== "SHIELD-HIT12A"
 
-![Rule for protons](assets/scoring/protons_rule_z_eq_1.png)
+    We define a filter in the FILTERS section of the SCORING tab.
+    By pressing `+ FILTER` (or `+ CUSTOM FILTER` in SHIELD-HIT), new filter will be added to the list of filters.
+    We adjust the name of the filter to `Protons` and add two rules to define proton (A=1 and Z=1):
+    First rule is added by clicking `ADD RULE` button and then selecting `Z` and `=` from the drop-down lists.
+    Then we type `1` in the text field.
 
-Second rule defines the `A=1` condition.
+    ![Rule for protons](assets/scoring/protons_rule_z_eq_1.png)
 
-![Rule for protons](assets/scoring/protons_rule_a_eq_1.png)
+    Second rule defines the `A=1` condition.
 
-Finally, we apply the filter by selecting the Filter checkbox in the `Fluence` item in the list of `YZSlab` quantities.
-Then we choose `Protons` from the drop-down list of filters.
+    ![Rule for protons](assets/scoring/protons_rule_a_eq_1.png)
 
-![Alt text](assets/scoring/apply_filter.png)
+    Finally, we apply the filter by selecting the Filter checkbox in the `Fluence` item in the list of `YZSlab` quantities.
+    Then we choose `Protons` from the drop-down list of filters.
 
-> [!NOTE]
-> For SHIELD-HIT12A specifically, you can use `+ PARTICLE FILTER` and select Protons to get the same filter effect.
+    ![Alt text](assets/scoring/apply_filter.png)
+
+    !!! note
+        For SHIELD-HIT12A specifically, you can use `+ PARTICLE FILTER` and select Protons to get the same filter effect.
+
+=== "🚧 FLUKA"
+
+    Under development
+
+=== "🚧 Geant4"
+
+    Under development
