@@ -24,26 +24,58 @@ Detectors can be added either by selecting `Object > Detector` in Menu Bar or cl
 
 ### Narrow cylinder along the beam axis
 
-Let's start with adding a cylinder with radius of 1cm and length of 12cm along the beam axis, spanning from -2cm to 12cm along Z axis.
-By pressing `+ DETECTOR` button a new item will be added to the list of detectors. Change the settings as follows:
+=== "SHIELD-HIT12A"
 
-- Rename the detector to `AlongBeamAxis`.
-- Set the position in PLACEMENT section. To get correct span we set center to (0,0,4) cm.
-- Select the geometry type. For this example, use Cyl for cylinder geometry. Change the depth and radius as below.
-- Under GRID, change the number of bins. We divide the detector into 120 bins along the Z axis, so that each bin is 1mm long.
+    Let's start with adding a cylinder with radius of 1cm and length of 12cm along the beam axis, spanning from -2cm to 10cm along Z axis.
+    By pressing `+ DETECTOR` button a new item will be added to the list of detectors. Change the settings as follows:
 
-![Setting up new detector](assets/scoring/detector_details.png)
+    - Rename the detector to `AlongBeamAxis`.
+    - Set the position in PLACEMENT section. To get correct span we set center to (0,0,4) cm.
+    - Select the geometry type. For this example, use Cyl for cylinder geometry. Change the depth and radius as below.
+    - Under GRID, change the number of bins. We divide the detector into 120 bins along the Z axis, so that each bin is 1mm long.
+
+    ![Setting up new detector](assets/scoring/detector_details.png)
+
+=== "🚧 FLUKA"
+
+    Under development
+
+=== "Geant4"
+
+    Let's start with adding a cylinder with radius of 1cm and length of 12cm along the beam axis, spanning from -6cm to 6cm along Z axis.
+    By pressing `+ DETECTOR` button a new item will be added to the list of detectors. Change the settings as follows:
+
+    - Rename the detector to `AlongBeamAxis`.
+    - Select the geometry type. For this example, use Cyl for cylinder geometry. Change the depth and radius as below.
+    - Under GRID, change the number of bins. We divide the detector into 120 bins along the Z axis, so that each bin is 1mm long.
+
+    ![Setting up new detector](assets/scoring/geant4_detector_details.png)
 
 When selected, the detector should be visible in the 3D and cross-section views.
 
 ### Slab in YZ plane
 
-Lets add a 1mm thick slab detector in YZ plane, spanning from -2cm to 12cm in Z direction and -5cm to 5cm in Y direction.
+=== "SHIELD-HIT12A"
 
-We select the detector type to be `Mesh` and set the center to (0,0,4) cm and dimensions to 0.1 x 10 x 12 cm.
-This time the bins are defined in Y and Z directions, so we set 100 bins in Y and 120 bins in Z directions to get 1x1mm bins.
+    Lets add a 1mm thick slab detector in YZ plane, spanning from -2cm to 10cm in Z direction and -5cm to 5cm in Y direction.
 
-![Setting up second detector](assets/scoring/detector_details_slabyz.png)
+    We select the detector type to be `Mesh` and set the center to (0,0,4) cm and dimensions to 0.1 x 10 x 10 cm.
+    This time the bins are defined in Y and Z directions, so we set 100 bins in Y and 120 bins in Z directions to get 1x1mm bins.
+
+    ![Setting up second detector](assets/scoring/detector_details_slabyz.png)
+
+=== "🚧 FLUKA"
+
+    Under development
+
+=== "Geant4"
+
+    Lets add a 1mm thick slab detector in YZ plane, spanning from -6cm to 6cm in Z direction and -5cm to 5cm in Y direction.
+
+    We select the detector type to be `Mesh` and set the dimensions to 0.1 x 10 x 10 cm.
+    This time the bins are defined in Y and Z directions, so we set 100 bins in Y and 120 bins in Z directions to get 1x1mm bins.
+
+    ![Setting up second detector](assets/scoring/geant4_detector_details_slabyz.png)
 
 ## Scoring output
 
@@ -77,9 +109,9 @@ Let's start by defining a scoring for depth dose profile in cylinder detector al
 This can be done by expanding the `AlongBeamAxis` item in the Outputs list by clicking on `+` icon.
 We can see that the output has already a first scoring quantity added, named `Quantity`.
 
-=== "SHIELD-HIT12A"
+![Default quantity](assets/scoring/default_quantity.png)
 
-    ![Default quantity](assets/scoring/default_quantity.png)
+=== "SHIELD-HIT12A"
 
     By default, scoring of dose was selected, so we stay with this, just adding a meaningful name: `Dose`.
 
@@ -90,9 +122,12 @@ We can see that the output has already a first scoring quantity added, named `Qu
 
     Under development
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    By default, scoring of dose (in Gy) was selected, so we stay with this, just adding a meaningful name: `Dose`.
+
+    We are planning to simulate the interaction of beam of protons with the phantom, and with such scoring we could see the
+    characteristic Bragg peak.
 
 ### Fluence profile in YZ plane
 
@@ -111,9 +146,12 @@ on the fluence of protons. Such thickness should be enough to stop most complete
 
     Under development
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    To score the fluence, we need to change the scoring quantity to `Fluence` and add a meaningful name.
+    We select default quantity in `YZSlab` item, define proper name and quantity type:
+
+    ![Defining Fluence quantity](assets/scoring/geant4_quantity_fluence.png)
 
 !!! note
     Quantity type supports typing letters to filter the list of available quantities.
@@ -149,6 +187,15 @@ In this case, to limit the scoring to protons only, we need to add a filter.
 
     Under development
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    We define a filter in the FILTERS section of the SCORING tab.
+    By pressing `+ FILTER`, new filter will be added to the list of filters.
+    We adjust the name of the filter to `Protons`, set the type to particle and select Proton.
+
+    ![Rule for protons](assets/scoring/geant4_filter_protons.png)
+
+    Finally, we apply the filter by selecting the Filter checkbox in the `Fluence` item in the list of `YZSlab` quantities.
+    Then we choose `Protons` from the drop-down list of filters.
+
+    ![Alt text](assets/scoring/geant4_apply_filter.png)
