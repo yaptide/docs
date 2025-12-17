@@ -21,9 +21,15 @@ Finally, particle type and number of primaries can be set.
 
     Under development
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    In our case we will move the beam to be located in front of the collimator by setting the beam position to (0,0,-6) cm.
+    The energy is adjusted to 70 MeV with 1% of energy spread, this way we can stop the beam using 1cm of lead.
+    Beam shape is set to a circular shape with 3cm radius (to be larger than the collimator hole).
+
+    ![Setting up beam](assets/settings/geant4_beam_adjustments.png)
+
+    Rest of parameters are left with default values.
 
 # Physics settings
 
@@ -36,6 +42,6 @@ Physics settings are defined in the `Physics` area just below the `Beam` definit
 
     ![Alt text](assets/settings/physics_settings.png)
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    Currently unsupported

@@ -82,6 +82,8 @@ In the following sections we will go through generation of simple geometry. It w
     The figure is created and its cross-sections in YX, XZ and ZY planes visible in the 3 windows in the center of the screen. 
     The 3-D projection is visible as well.
 
+    ### Water phantom
+
     Let's now add a box which will represent a water phantom in which the simulated beam will stop.
     This box will be placed inside the world box and will be 8cm x 8cm x 8cm in size.
     We are going to place it at (4,0,0) position as well.
@@ -178,6 +180,75 @@ In the following sections we will go through generation of simple geometry. It w
 
     These are the basic steps for defining geometry for CSG-based simulators.
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    ### World filled with air
+
+    Let's start with adding a box filled with air with dimensions large enough to fit the other object we would like to simulate.
+    There are two ways to add a box, either selecting `Object > Box` in Menu Bar, or clicking `+ BOX` in HIERARCHY section in GEOMETRY tab.
+
+    ![Add Figure from Object Menu](assets/geometry/menu_object_add.png)
+
+    ![Add Figure from FIGURES section](assets/geometry/hierarchy_add.png)
+
+    !!! warning
+        For Geant4, there should be only one volume at the root level, with position set to (0, 0, 0).
+
+    Let's create a box with dimensions 12cm x 10cm x 10cm, filled with air.
+    First, expand the details to see the values for DIMENSIONS and MATERIAL and the INFORMATION section to set the name.
+    Note that basic dimensions units in YAPTIDE are centimeters.
+    Let's also assign a color for the figure to differentiate it from others.
+
+    ![Configure World volume](assets/geometry/geant4_world_details.png)
+
+    ### Water phantom
+
+    Let's now add a box which will represent a water phantom in which the simulated beam will stop.
+    This box will be placed in the center of the world box and will be 8cm x 8cm x 8cm in size.
+    The dimensions are given in such way that the water phantom is fully contained in the world box.
+
+    !!! warning
+        Each Geant4 volume must be fully contained within its parent volume.
+
+    This time we're going to demonstrate how to duplicate existing figure, and then modify its dimensions.
+    Right-click on the WorldBox entry visible in the FIGURES section and click Duplicate.
+
+    ![Duplicate WorldBox](assets/geometry/geant4_duplicate.png)
+
+    The newly created figure will inherit the name from the duplicated object. An `_1` suffix will be added to the name to keep all the names unique.
+    All other properties (like position, dimensions and material) will be copied as well.
+
+    ![Duplicated WorldBox](assets/geometry/geant4_duplicated.png)
+
+    We can rename the figure from the context menu.
+
+    ![Rename World_1 to WaterPhantom](assets/geometry/geant4_rename.png)
+
+    ![Rename input](assets/geometry/geant4_rename_input.png)
+
+    Since Geant4 requires a mother-daughter volume relationship in the form of a tree structure, we move the WaterPhantom
+    under the World by dragging and dropping the label in the HIERARCHY.
+
+    ![Drag and drop in hierarchy](assets/geometry/geant4_hierarchy_move.gif)
+
+    Now let's adjust the dimensions of the new figure to 8cm x 8cm x 8cm and set the material to water.
+    Note that the two figures are now visible in the 3-D projection window and all three cross-sections.
+
+    ![WaterPhantom](assets/geometry/geant4_water_phantom_details.png)
+
+    ### Collimator
+
+    The collimator is a figure with central cutout that we want to suspend in the air, at the front of the phantom.
+    In this geometry representation we cannot cut out material, but as did with the phantom, we can replace the insides.
+    With that in mind, we first create a filled cylinder of lead, and then add an inner cylinder that will add
+    the surrounding material back - air in this case.
+
+    First, let's create an outer lead cylinder.
+
+    ![Collimator](assets/geometry/geant4_collimator_details.png)
+
+    Let's now add the insides filled with air.
+
+    ![Collimator cutout](assets/geometry/geant4_cutout_details.png)
+
+    These are the basic steps for defining geometry for simulators using nested volumes.

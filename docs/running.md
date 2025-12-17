@@ -61,12 +61,31 @@ The Simulations Page consists of 3 main sections:
     !!! note
         Large Batch Jobs may stay longer in `PENDING` state, waiting for the resources to be available.
 
-=== "🚧 Geant4"
+=== "Geant4"
 
-    Under development
+    In order to run the simulation, Geant4 needs to sample information from datasets.
+    You can choose to download them all (`FULL DATASETS`) before starting the simulation
+    (you will not be able to start the simulation before the datasets are loaded),
+    or to download the necessary files on demand (`PARTIAL DATASETS`).
 
-When the parameters are set, click `START SIMULATION` to send it to the YAPTIDE server.
-After successful submission, the simulation is in PENDING state.
+    ![Dataset download options](assets/running/geant4_dataset_download_options.png)
+
+    !!! note
+        Using `FULL DATASETS` is a recommended way. After download, the files are stored in the browser even after closing the page
+        and can be loaded back nearly instantly.
+
+    For dataset management there exist an additional Dataset Download panel. If the files have not been downloaded yet,
+    the `START DOWNLOAD` button is presented. If the application detects that the datasets are present in the browser cache,
+    the `LOAD FROM CACHE` button is shown instead.
+
+    ![Datasets not cached](assets/running/dataset_download_not_cached.png)
+
+    ![Datasets cached](assets/running/dataset_download_cached.png)
+
+    After loading the datasets, you are clear to start the simulation.
+
+When the conditions are met, and the parameters are configured, click `START SIMULATION`.
+After successful submission to local or remote worker, the simulation is in PENDING state.
 The simulation will start automatically when the resources are available, then it will change to RUNNING state,
 and you will be able to see the progress of the simulation by observing the progress bar.
 
@@ -78,6 +97,19 @@ The simulation is also present in the pinned "Last 5 simulations" section.
 ![Pinned to Last 5 simulations section](assets/running/direct_run_queue.png)
 
 When the simulation finishes, it will automatically navigate to Results page and display the results.
+
+### Running from input files
+
+The default source for the simulation data is the active editor project. Under the hood, the project is converted into
+input files that the specific simulator understands. You may want to modify the files directly, and start the simulation
+with the modified input.
+
+Navigate to Input Files panel, select `GENERATE FROM EDITOR` to get the files that would be submitted.
+You can modify them to your needs. When you are ready, click `RUN WITH THESE INPUT FILES`. You will see the Run form
+switches from `EDITOR PROJECT DATA` to `INPUT FILES DATA` and the files are listed. Click `START SIMULATION` to start
+with the modified files.
+
+![Running from input files](assets/running/start_from_input_files.png)
 
 ### Viewing results
 
