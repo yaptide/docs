@@ -1,0 +1,177 @@
+---
+title: Docker Setup — Celery Workers
+description: Run the full YAPTIDE backend with Celery workers in Docker containers for integration testing and development.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+TODO maybe this tutorial should mention only dev mode and there should be another one for production-like setup? 
+
+Running the backend in Docker is useful for **integration testing** — you get a production-like setup without manually managing Redis, PostgreSQL, and worker processes.
+
+## When to use this setup
+
+| Scenario | Recommended setup |
+|---|---|
+| Frontend / Geant4 in-browser only | [Frontend Only](/docs/development/frontend-only/) |
+| Local backend + Celery (fast iteration) | [Local Celery](/docs/development/local-celery/) |
+| Local backend + SLURM / PLGrid | [Local SLURM](/docs/development/local-slurm/) |
+| **Docker backend + Celery workers** | **This page** |
+| Docker backend + SLURM / PLGrid | [Docker SLURM](/docs/development/docker-slurm/) |
+
+## Prerequisites
+
+- Docker Engine 20.10+ with Docker Compose v2
+- **Node.js 20+** with npm (for the frontend)
+- **Python 3.9+** with pip and venv (for the converter submodule build)
+- **Git**
+
+## Step 1: Clone and start
+
+```bash
+git clone https://github.com/yaptide/yaptide.git
+cd yaptide
+```
+
+<Tabs>
+<TabItem label="Linux">
+
+```bash
+scripts/start_with_docker.sh
+```
+
+</TabItem>
+<TabItem label="Windows (PowerShell)">
+
+```powershell
+scripts/start_with_docker.ps1
+```
+
+</TabItem>
+</Tabs>
+
+TODO maybe explain docker fast/normal mode
+The script detects your Docker version and uses the fastest method automatically.
+
+## Step 2: Create a user
+
+```bash
+docker exec -w /usr/local/app/ yaptide_flask \
+  ./yaptide/admin/db_manage.py add-user admin --password password
+```
+
+## Step 3: Start the frontend
+
+TODO change this to use docker instructions
+
+The backend API is available at **http://localhost:5000** (via NGINX). Now start the frontend in a separate terminal:
+
+```bash
+git clone https://github.com/yaptide/ui.git
+cd ui
+git submodule update --init --recursive
+npm install
+```
+
+Create a `.env` file in the `ui/` directory:
+
+```bash title="ui/.env"
+REACT_APP_BACKEND_URL=http://localhost:5000
+```
+
+```bash
+npm run start
+```
+
+Open **http://localhost:3000/web_dev**.
+
+:::caution
+With a Chromium-based browser, use `https://localhost:8443` as the backend URL instead of `http://localhost:5000`. This avoids cookie issues with browser security policies.
+
+```bash title="ui/.env"
+REACT_APP_BACKEND_URL=https://localhost:8443
+```
+:::
+
+## Development Compose variant
+
+For development, there's also a develop compose file that mounts local code:
+
+<Tabs>
+<TabItem label="Linux">
+
+```bash
+scripts/start_with_docker_develop.sh
+```
+
+</TabItem>
+<TabItem label="Windows (PowerShell)">
+
+```powershell
+scripts/start_with_docker_develop.ps1
+```
+
+</TabItem>
+</Tabs>
+
+This uses `docker-compose-develop.yml` which mounts your local source code into the containers, so changes are reflected without rebuilding.
+
+## Managing the database
+
+View all management commands:
+
+```bash
+docker exec -w /usr/local/app/ yaptide_flask \
+  ./yaptide/admin/db_manage.py --help
+```
+
+### Connecting to PostgreSQL directly
+
+The PostgreSQL container exposes port 5432. Connect with any PostgreSQL client:
+
+```bash
+psql -h localhost -U yaptide_user -d yaptide_db
+# password: yaptide_password (default)
+```
+
+Or use a GUI tool like pgAdmin.
+
+## Stopping
+
+TODO not sure if this is needed
+
+```bash
+docker compose down
+```
+
+To also delete all data (PostgreSQL volume, simulator cache):
+
+```bash
+docker compose down -v
+```
+
+## Container overview
+
+TODO is this needed?
+
+| Container | Port | Purpose |
+|---|---|---|
+| `yaptide_nginx` | 5000 (HTTP), 8443 (HTTPS) | Reverse proxy |
+| `yaptide_flask` | 6000 (internal) | Flask API |
+| `yaptide_postgresql` | 5432 | Database |
+| `yaptide_redis` | 6379 (internal) | Celery broker |
+| `yaptide_simulation_worker` | — | Runs simulations |
+| `yaptide_helper_worker` | — | Post-processing |
+
+Check container health:
+
+```bash
+docker compose ps
+```
+
+View logs:
+
+```bash
+docker compose logs -f yaptide_flask         # Flask API
+docker compose logs -f yaptide_simulation_worker  # Simulation worker
+```

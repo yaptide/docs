@@ -1,0 +1,93 @@
+---
+title: Beam & Physics
+description: Configure the particle source (beam) and physics settings for your simulation.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The particle source and physics parameters are configured in the **Settings** tab in the right-hand panel of the Editor.
+
+## Particle source (beam)
+
+![Beam settings](/docs/assets/settings/beam_settings.png)
+
+You can define:
+
+- **Position** and **direction** of the beam
+- **Energy** and energy spread
+- **Beam shape** (circular, rectangular, etc.) and divergence
+- **Particle type** (protons, carbon ions, etc.)
+- **Number of primaries** (how many particles to simulate)
+
+### Configuring the beam for our example
+
+We want to fire a 70 MeV proton beam at the collimator-phantom geometry we built in the [previous section](/docs/user-guide/geometry/).
+The beam should be wider than the collimator hole (radius 2 cm) so that we can observe the collimation effect.
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+Move the beam in front of the collimator by setting position to `(0, 0, −1.5)` cm.
+Set energy to **70 MeV** with **1% energy spread** — this is enough for 1 cm of lead to stop most protons (the CSDA range in lead at 70 MeV is about 8 mm).
+Set beam shape to circular with **3 cm radius**.
+
+![Setting up beam](/docs/assets/settings/beam_adjustments.png)
+
+Leave the remaining parameters at their defaults.
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA beam configuration follows the same UI pattern. Details will be added once FLUKA support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Move the beam in front of the collimator by setting position to `(0, 0, −6)` cm.
+Set energy to **70 MeV** with **1% energy spread**.
+Set beam shape to circular with **3 cm radius**.
+
+![Setting up beam](/docs/assets/settings/geant4_beam_adjustments.png)
+
+Leave the remaining parameters at their defaults.
+
+</TabItem>
+</Tabs>
+
+## Physics settings
+
+Physics settings are defined in the **Physics** area just below the beam definition.
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+You can tune:
+
+- **Step length** via the relative energy loss parameter — decreasing it reduces the step size for more accurate but slower tracking
+- **Nuclear reactions** — toggle on/off
+- **Scattering models** — choose from available models
+
+![Physics settings](/docs/assets/settings/physics_settings.png)
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA physics configuration details will be added once support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Geant4 physics configuration through the UI is currently not supported. Default physics lists are used.
+
+</TabItem>
+</Tabs>
+
+## What's next?
+
+With the beam configured, proceed to:
+
+- **[Scoring](/docs/user-guide/scoring/)** — define detectors, scored quantities, and filters

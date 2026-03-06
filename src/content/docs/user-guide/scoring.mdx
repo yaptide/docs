@@ -1,0 +1,235 @@
+---
+title: Scoring
+description: Define detectors, scoring quantities, filters, and outputs to measure what happens in your simulation.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Scoring tells the simulator **what to measure** and **where to measure it**.
+You need to define several items:
+
+- **Detector** — the scoring geometry (where to score)
+- **Quantity** — what physical quantity to score (dose, fluence, etc.)
+- **Output** — a group of quantities scored in the same detector
+- **Filter** (optional) — restrict scoring to specific particles (e.g. "protons only")
+- **Differential modifiers** (optional) — score in energy or angle bins
+
+## Detectors
+
+Detectors can be added by selecting **Object > Detector** in the menu bar, or clicking **+ DETECTOR** in the DETECTORS section of the GEOMETRY tab.
+
+![Adding a detector from menu bar](/docs/assets/scoring/menu_detector_add.png)
+
+![Adding a detector from DETECTORS section](/docs/assets/scoring/detector_add.png)
+
+### Narrow cylinder along the beam axis
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+Add a cylinder with radius 1 cm and length 12 cm along the beam axis, spanning from −2 cm to 10 cm in Z.
+Press **+ DETECTOR** and configure:
+
+- Rename to `AlongBeamAxis`
+- Set position (centre) to `(0, 0, 4)` cm
+- Select geometry type: **Cyl** (cylinder)
+- Under GRID, set 120 bins along the Z axis (each bin = 1 mm)
+
+![Setting up new detector](/docs/assets/scoring/detector_details.png)
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA detector configuration details will be added once support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Add a cylinder with radius 1 cm and length 12 cm along the beam axis, spanning from −6 cm to 6 cm in Z.
+Press **+ DETECTOR** and configure:
+
+- Rename to `AlongBeamAxis`
+- Select geometry type: **Cyl** (cylinder). Set depth and radius.
+- Under GRID, set 120 bins along the Z axis (each bin = 1 mm)
+
+![Setting up new detector](/docs/assets/scoring/geant4_detector_details.png)
+
+</TabItem>
+</Tabs>
+
+When selected, the detector should be visible in the 3D and cross-section views.
+
+### Slab in YZ plane
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+Add a 1 mm thick slab detector in the YZ plane, spanning from −2 to 10 cm in Z and −5 to 5 cm in Y.
+
+Select type **Mesh**, set centre to `(0, 0, 4)` cm and dimensions to `0.1 × 10 × 10` cm.
+Set 100 bins in Y and 120 bins in Z for 1×1 mm resolution.
+
+![Setting up second detector](/docs/assets/scoring/detector_details_slabyz.png)
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA detector configuration details will be added once support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Add a 1 mm thick slab detector in the YZ plane, spanning from −6 to 6 cm in Z and −5 to 5 cm in Y.
+
+Select type **Mesh** and set dimensions to `0.1 × 10 × 10` cm.
+Set 100 bins in Y and 120 bins in Z for 1×1 mm resolution.
+
+![Setting up second detector](/docs/assets/scoring/geant4_detector_details_slabyz.png)
+
+</TabItem>
+</Tabs>
+
+## Scoring output
+
+Switch to the **SCORING** tab in the right menu of the Editor view.
+
+![Scoring tab](/docs/assets/scoring/scoring_tab.png)
+
+### Along the beam axis
+
+Press **Add output**. A new item appears with no detector assigned.
+
+![Scoring Output added](/docs/assets/scoring/output_added.png)
+
+Name it `AlongBeamAxis` and select the cylinder detector from the dropdown.
+
+![Setting up the Scoring Output](/docs/assets/scoring/output_details.png)
+
+### YZ plane slab
+
+Repeat for the slab detector:
+
+![Setting up the YZSlab Scoring Output](/docs/assets/scoring/output_details_yzslab.png)
+
+## Scoring quantity
+
+### Depth dose profile
+
+Expand the `AlongBeamAxis` output by clicking **+**. A default quantity named `Quantity` is already present.
+
+![Default quantity](/docs/assets/scoring/default_quantity.png)
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+The default is dose scoring — keep it, just rename to `Dose`.
+
+We're simulating protons hitting the water phantom. With this scoring, we'll see the characteristic **Bragg peak** — a sharp dose increase near the end of the proton range.
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA quantity configuration details will be added once support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+The default is dose (in Gy) — keep it, just rename to `Dose`.
+
+We're simulating protons hitting the water phantom. With this scoring, we'll see the characteristic **Bragg peak**.
+
+</TabItem>
+</Tabs>
+
+### Fluence profile in YZ plane
+
+Since we placed a 1 cm thick lead collimator, we want to see how it affects proton fluence.
+At 70 MeV, the CSDA range of protons in lead is about 8 mm — so 1 cm should stop most of them outside the 2 cm hole.
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+Select the default quantity in the `YZSlab` output, set the name and change the type to **Fluence**.
+
+![Defining Fluence quantity](/docs/assets/scoring/quantity_fluence.png)
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA quantity configuration details will be added once support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Select the default quantity in the `YZSlab` output, set the name and change the type to **Fluence**.
+
+![Defining Fluence quantity](/docs/assets/scoring/geant4_quantity_fluence.png)
+
+</TabItem>
+</Tabs>
+
+:::tip
+The quantity type dropdown supports typing to filter the list of available quantities.
+:::
+
+## Scoring filters
+
+Often, scoring a quantity for all particles isn't very useful. We want to score proton fluence only.
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A">
+
+Define a filter in the FILTERS section of the SCORING tab.
+Press **+ FILTER** (or **+ CUSTOM FILTER** in SHIELD-HIT12A). Name it `Protons`.
+
+Add two rules:
+1. Click **ADD RULE**, select `Z = 1`
+
+![Rule for Z](/docs/assets/scoring/protons_rule_z_eq_1.png)
+
+2. Add another rule: `A = 1`
+
+![Rule for A](/docs/assets/scoring/protons_rule_a_eq_1.png)
+
+Apply the filter by checking the **Filter** checkbox in the `Fluence` quantity under `YZSlab`, then select `Protons`.
+
+![Apply filter](/docs/assets/scoring/apply_filter.png)
+
+:::tip
+For SHIELD-HIT12A, you can use **+ PARTICLE FILTER** and select "Protons" directly for the same effect.
+:::
+
+</TabItem>
+<TabItem label="FLUKA">
+
+:::note[Under development]
+FLUKA filter configuration details will be added once support is complete.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Define a filter in the FILTERS section. Press **+ FILTER**, name it `Protons`, set type to **particle**, and select **Proton**.
+
+![Rule for protons](/docs/assets/scoring/geant4_filter_protons.png)
+
+Apply the filter by checking the **Filter** checkbox in the `Fluence` quantity, then select `Protons`.
+
+![Apply filter](/docs/assets/scoring/geant4_apply_filter.png)
+
+</TabItem>
+</Tabs>
+
+## What's next?
+
+With geometry, beam, and scoring ready, proceed to:
+
+- **[Running Simulations](/docs/user-guide/running-simulations/)** — submit, monitor, and view results

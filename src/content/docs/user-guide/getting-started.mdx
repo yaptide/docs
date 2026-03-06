@@ -1,0 +1,84 @@
+---
+title: Getting Started
+description: Start using YAPTIDE — try the demo, connect to PLGrid, or load a project from a URL.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+YAPTIDE lets you design 3D simulation geometry, configure a particle beam, define scoring, and run Monte Carlo simulations — all from the browser.
+There are two ways to use it, depending on your needs.
+
+## Demo mode (no account needed)
+
+The demo version runs entirely in your browser. Open it at:
+
+**[yaptide.github.io](https://yaptide.github.io)**
+
+No login, no install, no server. You can:
+
+- Design and visualise 3D simulation geometry
+- Configure particle beams, materials, and physics
+- Define scoring detectors, quantities, and filters
+- Generate simulator input files (for SHIELD-HIT12A, FLUKA, or Geant4)
+- Run Geant4 simulations directly in the browser (via WebAssembly)
+- Browse results from previously computed simulations
+
+:::tip
+Demo mode is enough if you want to learn the UI, prepare input files, or run Geant4. SHIELD-HIT12A and FLUKA execution requires the full version below.
+:::
+
+![Demo landing page](/docs/assets/demo.png)
+
+## Loading an example project
+
+The fastest way to learn is to open one of the built-in examples.
+
+1. Navigate to the **Examples** page from the left sidebar
+2. Examples are grouped by simulator — **COMMON** examples work with both SHIELD-HIT12A and FLUKA
+
+![Select example](/docs/assets/geometry/examples.png)
+
+3. You'll be prompted that loading will overwrite the current project — confirm to proceed
+
+![Load project alert](/docs/assets/geometry/load_project_alert.png)
+
+4. The editor opens with pre-configured geometry, beam, and scoring
+
+## Creating a blank project
+
+To start from scratch:
+
+1. Click **Project > New** in the menu bar
+
+![Blank project](/docs/assets/geometry/blank_project.png)
+
+2. Confirm that you want to overwrite the current project (save your work first if needed)
+
+![New project alert](/docs/assets/geometry/new_project_alert.png)
+
+3. Enter a project title and optional description, then click **SAVE**
+
+![Title and description](/docs/assets/geometry/project_info.png)
+
+4. Select the simulator from the dropdown in the header bar
+
+![Simulator Dropdown](/docs/assets/geometry/select_simulator.gif)
+
+:::note
+The **COMMON** option represents features supported by both FLUKA and SHIELD-HIT12A. You can switch from COMMON to either one later.
+:::
+
+:::tip
+You can edit the title and description at any time by clicking the title in the header bar.
+
+![Edit project info](/docs/assets/geometry/edit_project_info.gif)
+:::
+
+## What's next?
+
+Now that you have a project loaded, follow the tutorial in order:
+
+1. **[Geometry](/docs/user-guide/geometry/)** — define 3D shapes, zones, and materials
+2. **[Beam & Physics](/docs/user-guide/beam-physics/)** — configure the particle source and physics settings
+3. **[Scoring](/docs/user-guide/scoring/)** — set up detectors, quantities, and filters
+4. **[Running Simulations](/docs/user-guide/running-simulations/)** — submit, monitor, and view results

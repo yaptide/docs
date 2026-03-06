@@ -1,0 +1,159 @@
+---
+title: Running Simulations
+description: Submit simulations, monitor progress, view results, and export data.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Overview
+
+:::note
+Running simulations on SHIELD-HIT12A or FLUKA requires a logged-in account (PLGrid or a self-hosted instance).
+Geant4 runs entirely in the browser — no account needed.
+:::
+
+To run a simulation, you need a project loaded in the editor with geometry, beam, and scoring configured (see previous sections).
+
+![Simulation set up](/docs/assets/running/simulation_set_up.png)
+
+Click **RUN** in the title bar, or select the **Simulations** page from the left navigation bar.
+
+## Simulations page
+
+The Simulations page has three sections:
+
+1. **Simulations Archive** — all previously run simulations in a paginated list
+2. **Run new simulation** — submit the current editor project
+3. **Last 5 simulations** — quick access to recent runs
+
+:::tip
+The sidebar with sections 2 and 3 is pinned to the Simulations, Input Files, and Results pages, so you can start a new run from any of them.
+:::
+
+![Simulations Page](/docs/assets/running/simulations_page.png)
+
+## Running the simulation
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A / FLUKA">
+
+You have two options:
+
+### Direct run
+
+Runs on dedicated cloud resources (currently ~15 cores in C3 PLGrid Cloud).
+Faster to start, but limited parallelism.
+
+Set the simulation name, number of tasks, and optionally override the number of primaries (default is from the SETTINGS tab in the Editor).
+
+![Direct Run](/docs/assets/running/direct_run.png)
+
+### Batch run
+
+Submits to the SLURM batch system on the Ares supercomputer.
+Takes longer to start (queue wait), but can use many more cores.
+
+![Batch Run](/docs/assets/running/batch_run.png)
+
+The job enters the queue and you can use the application while it waits:
+
+![Queued Batch Run](/docs/assets/running/batch_run_queue.png)
+
+:::note
+Large batch jobs may stay in `PENDING` state while waiting for cluster resources.
+:::
+
+</TabItem>
+<TabItem label="Geant4">
+
+Geant4 runs in your browser via WebAssembly. Before starting, the simulator needs physics datasets.
+
+Choose your download strategy:
+
+- **FULL DATASETS** — download everything up front (recommended). Files are cached in the browser and load instantly next time.
+- **PARTIAL DATASETS** — download data files on demand as the simulation requests them.
+
+![Dataset download options](/docs/assets/running/geant4_dataset_download_options.png)
+
+The Dataset Download panel shows the current state. If files haven't been downloaded yet, click **START DOWNLOAD**. If they're already cached, click **LOAD FROM CACHE**.
+
+![Datasets not cached](/docs/assets/running/dataset_download_not_cached.png)
+
+![Datasets cached](/docs/assets/running/dataset_download_cached.png)
+
+</TabItem>
+</Tabs>
+
+## Monitoring progress
+
+Click **START SIMULATION** once everything is configured.
+The simulation starts in `PENDING` state and transitions to `RUNNING` when resources are available:
+
+![Pending state](/docs/assets/running/direct_run_pending.png)
+![Running state](/docs/assets/running/direct_run_running.png)
+
+The run also appears in the "Last 5 simulations" sidebar:
+
+![Pinned to Last 5 simulations section](/docs/assets/running/direct_run_queue.png)
+
+When complete, you're automatically redirected to the Results page.
+
+## Running from input files
+
+By default, the simulation uses the editor project. But you can also edit the raw input files before submitting:
+
+1. Navigate to the **Input Files** panel
+2. Click **GENERATE FROM EDITOR** to get the files the simulator would receive
+3. Edit as needed
+4. Click **RUN WITH THESE INPUT FILES** — the form switches from `EDITOR PROJECT DATA` to `INPUT FILES DATA`
+5. Click **START SIMULATION**
+
+![Running from input files](/docs/assets/running/start_from_input_files.png)
+
+This is useful for fine-tuning parameters that aren't exposed in the UI.
+
+## Viewing results
+
+Once all tasks complete, the status changes to `COMPLETED` and the Results tab opens automatically.
+
+### Depth dose plot
+
+The first result is the depth dose profile from the `AlongBeamAxis` detector:
+
+![Results of a finished simulation](/docs/assets/running/finished_results.png)
+
+### Interactive plots
+
+Plots are interactive. Drag to zoom into a region:
+
+![Selecting fragments to zoom](/docs/assets/running/zoom_selected.png)
+
+![Zoomed view](/docs/assets/running/zoomed.png)
+
+Right-click in a plot area to change settings. Both axes support logarithmic scale:
+
+![Changing plot settings](/docs/assets/running/plot_settings.gif)
+
+### Export to CSV
+
+Click the **Export graph to CSV** button to save plot data:
+
+![Export CSV](/docs/assets/running/export_csv.png)
+
+### 2D results
+
+Select the `YZSlab` output to see the collimation effect — the lead stops most protons outside the 2 cm hole:
+
+![Collimator results](/docs/assets/running/collimator_results.png)
+
+Two-dimensional plots support profile inspection. Right-click in the coloured area to see profiles:
+
+![Profiles](/docs/assets/running/profiles.gif)
+
+## What's next?
+
+You've completed the YAPTIDE tutorial. From here you can:
+
+- **[Try the demo](https://yaptide.github.io)** with your own geometry
+- Explore the **[Architecture](/docs/architecture/overview/)** to understand how the system works
+- **[Contribute](/docs/contributing/guide/)** to the project

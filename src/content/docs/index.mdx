@@ -1,0 +1,65 @@
+---
+title: YAPTIDE
+description: A web-based IDE for Monte Carlo particle transport simulations.
+template: splash
+hero:
+  tagline: "Yet Another Particle Transport IDE — design, run, and visualize particle simulations from your browser."
+  actions:
+    - text: Try the Demo
+      link: https://yaptide.github.io
+      icon: external
+      variant: primary
+    - text: Read User Guide
+      link: /docs/user-guide/getting-started/
+      variant: secondary
+    - text: Read the Docs
+      link: /docs/user-guide/getting-started/
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## Get Started
+
+<CardGrid>
+  <Card title="Run Simulations" icon="rocket">
+    Get started with particle transport modeling immediately. - **[Try the
+    Demo](https://yaptide.github.io)** — Run Geant4 simulations directly in your
+    browser with zero setup. - **[Use PLGrid](https://yaptide.c3.plgrid.pl)** —
+    Submit SHIELD-HIT12A and FLUKA simulations to the PLGrid infrastructure. -
+    **[User Guide](/docs/user-guide/getting-started/)** — Learn how to design
+    geometry and configure beams.
+  </Card>
+  <Card title="Host an Instance" icon="setting">
+    Deploy YAPTIDE for your research group or institution. - **[Local Workers
+    (Celery)](/docs/hosting/celery-docker/)** — Host the app with a Celery
+    backend to use your own simulator binaries. - **[HPC Integration
+    (SLURM)](/docs/hosting/slurm-docker/)** — Host an instance integrated with a
+    computing cluster via SSH.
+  </Card>
+  <Card title="Develop & Contribute" icon="laptop">
+    Set up a local environment to fix bugs or build new features. - **[Frontend
+    Only](/docs/development/frontend-only/)** — Set up the frontend to develop
+    the UI with minimal setup. - **[Full Stack
+    (Local)](/docs/development/local-celery/)** — Spin up the complete local
+    environment for backend development. - **[Full Stack
+    (Docker)](/docs/development/docker-celery/)** — Deploy the complete app in
+    Docker containers for integration testing.
+  </Card>
+</CardGrid>
+
+## What is YAPTIDE?
+
+**YAPTIDE** (Yet Another Particle Transport IDE) is an open-source web application for Monte Carlo particle transport simulations. It supports **SHIELD-HIT12A**, **FLUKA**, and **Geant4** — three of the most widely used codes in radiation physics.
+
+You design 3D geometry in a browser-based editor, configure a particle beam and scoring detectors, and either generate simulator input files or run simulations directly — all without leaving the page.
+
+## How YAPTIDE Works
+
+YAPTIDE has three execution modes. You don't need the full stack for every one.
+
+| Mode                | What you can do                                            | What you need                          |
+| ------------------- | ---------------------------------------------------------- | -------------------------------------- |
+| **Demo**            | Edit geometry, generate input files, run Geant4 in-browser | Just a browser                         |
+| **Celery (direct)** | Submit SHIELD-HIT12A / FLUKA jobs to local workers         | Docker stack or local backend + Redis  |
+| **Batch (SLURM)**   | Submit to HPC clusters (e.g. PLGrid Ares)                  | Full stack + Keycloak + cluster access |

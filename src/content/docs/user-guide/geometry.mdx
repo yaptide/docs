@@ -1,0 +1,203 @@
+---
+title: Geometry
+description: Define simulation geometry — figures, zones, and materials for CSG (SHIELD-HIT12A / FLUKA) and nested volumes (Geant4).
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This page walks you through defining a complete simulation geometry.
+We'll build a setup with three components — a water phantom, a lead collimator with a hole, and a world volume filled with air.
+
+![Geometry Page](/docs/assets/geometry/geometry.png)
+
+## How geometry works
+
+Geometry definition varies between simulation engines:
+
+- **CSG (Constructive Solid Geometry)** — used by SHIELD-HIT12A and FLUKA. Shapes are built from primitive figures (boxes, cylinders, spheres) combined with boolean operators. The order of operations is defined within a **Zone**.
+- **Nested volumes** — used by Geant4. Figures are arranged in a tree-like hierarchy, where child volumes sit inside parent volumes.
+
+## Starting a new project
+
+See the [Getting Started](/docs/user-guide/getting-started/) page for how to create a blank project or load an example.
+
+## Adding figures
+
+We'll create three groups of figures:
+
+- **World box** — air-filled, large enough to contain everything
+- **Water phantom** — 8×8×8 cm box
+- **Collimator** — two cylinders (outer envelope + inner hole)
+
+<Tabs>
+<TabItem label="SHIELD-HIT12A / FLUKA">
+
+### World filled with air
+
+Add a box by selecting **Object > Box** in the menu bar, or clicking **+ BOX** in the FIGURES section of the GEOMETRY tab.
+
+![Add Figure from Object Menu](/docs/assets/geometry/menu_object_add.png)
+
+![Add Figure from FIGURES section](/docs/assets/geometry/figures_add.png)
+
+Create a box spanning from −2 to 10 cm in Z and −5 to 5 cm in X and Y.
+Set the **Position** (center) to `(4, 0, 0)` and **dimensions** to `12 × 10 × 10` cm.
+Basic dimension units in YAPTIDE are centimetres.
+Give the figure a meaningful name like `WorldBox`.
+
+![Object details](/docs/assets/geometry/object_details.png)
+
+The figure appears as cross-sections in the YX, XZ, and ZY planes, plus a 3D projection.
+
+### Water phantom
+
+We'll duplicate the world box and shrink it. Right-click on `WorldBox` in the FIGURES section and click **Duplicate**.
+
+![Duplicate WorldBox](/docs/assets/geometry/duplicate.png)
+
+The copy inherits the name with a `_1` suffix, plus all properties.
+
+![Duplicated WorldBox](/docs/assets/geometry/duplicated.png)
+
+Change the dimensions to `8 × 8 × 8` cm (position stays the same) and rename to `PhantomBox`.
+
+![PhantomBox](/docs/assets/geometry/phantom_box.png)
+
+### Collimator
+
+Add two cylinders — the outer envelope (radius 4 cm, thickness 1 cm) and the inner hole (radius 2 cm).
+Both are centred at `(0, 0, 0)`.
+Use click-and-drag on the 3D view to rotate and verify they look right.
+
+![Cylinders](/docs/assets/geometry/cylinders.png)
+
+</TabItem>
+<TabItem label="Geant4">
+
+### World filled with air
+
+Add a box by selecting **Object > Box** in the menu bar, or clicking **+ BOX** in the HIERARCHY section of the GEOMETRY tab.
+
+![Add Figure from Object Menu](/docs/assets/geometry/menu_object_add.png)
+
+![Add Figure from HIERARCHY section](/docs/assets/geometry/hierarchy_add.png)
+
+:::caution
+For Geant4, there must be exactly one volume at the root level, with position `(0, 0, 0)`.
+:::
+
+Create a box with dimensions `12 × 10 × 10` cm, filled with air.
+Expand the DIMENSIONS, MATERIAL, and INFORMATION sections to set values.
+Assign a colour to differentiate it from other figures.
+
+![Configure World volume](/docs/assets/geometry/geant4_world_details.png)
+
+### Water phantom
+
+Duplicate the world box — right-click on `WorldBox` and select **Duplicate**.
+
+![Duplicate WorldBox](/docs/assets/geometry/geant4_duplicate.png)
+
+The copy inherits all properties with a `_1` suffix.
+
+![Duplicated WorldBox](/docs/assets/geometry/geant4_duplicated.png)
+
+Rename it via the context menu:
+
+![Rename World_1 to WaterPhantom](/docs/assets/geometry/geant4_rename.png)
+
+![Rename input](/docs/assets/geometry/geant4_rename_input.png)
+
+:::caution
+Each Geant4 volume must be fully contained within its parent volume.
+:::
+
+Geant4 uses a mother-daughter hierarchy. Drag `WaterPhantom` under `World` in the HIERARCHY panel:
+
+![Drag and drop in hierarchy](/docs/assets/geometry/geant4_hierarchy_move.gif)
+
+Set dimensions to `8 × 8 × 8` cm and material to water.
+
+![WaterPhantom](/docs/assets/geometry/geant4_water_phantom_details.png)
+
+### Collimator
+
+In nested geometry, you can't cut out material directly. Instead, create a filled lead cylinder, then add an inner air cylinder to represent the hole.
+
+Outer lead cylinder:
+
+![Collimator](/docs/assets/geometry/geant4_collimator_details.png)
+
+Inner air cylinder (cutout):
+
+![Collimator cutout](/docs/assets/geometry/geant4_cutout_details.png)
+
+</TabItem>
+</Tabs>
+
+## Zones (CSG only)
+
+:::note
+Zones apply only to SHIELD-HIT12A and FLUKA. In Geant4, material assignment is done directly on each figure. Skip this section if using Geant4.
+:::
+
+Zones describe a volume of space by combining figures with boolean operations and assigning a physical material.
+
+:::caution
+Each point in space must belong to exactly one Zone. If a volume encloses another, you need to subtract the inner volume from the outer one to avoid overlap.
+:::
+
+You can add zones from **Object > Boolean Zone** in the menu, or from the ZONES section of the GEOMETRY tab.
+
+![Add Boolean Zone from Object Menu](/docs/assets/geometry/menu_boolean_zone_add.png)
+![Add Boolean Zone from ZONES section](/docs/assets/geometry/boolean_zone_add.png)
+
+:::note
+A special "World Zone" representing the entire simulation space is defined by default and cannot be removed.
+:::
+
+### Air zones
+
+We need two air zones because the collimator sits inside the world separately from the phantom:
+
+- **MainAirZone** — the world box, minus the phantom box and the outer collimator cylinder, plus the inner cylinder back
+- **CollimatorAirZone** — adds back the inner cylinder air
+
+Defining the MainAirZone with boolean operations:
+
+![Defining zone operations for MainZone](/docs/assets/geometry/zone_operations.gif)
+
+CollimatorAirZone:
+
+![Collimator air zone](/docs/assets/geometry/collimator_air_zone.png)
+
+Zones are visualised in the 3D view with solid colours. You can see the cutouts:
+
+![Zone in 3D view](/docs/assets/geometry/zone_vis.png)
+
+:::tip
+Set the **Opacity** under the MATERIAL section to see what's inside a zone.
+
+![Custom opacity](/docs/assets/geometry/custom_opacity.png)
+:::
+
+### Water phantom zone
+
+Add a new zone and assign `PhantomBox` as the figure.
+The default material is "Liquid Water" so no change needed.
+Change the colour and inspect in the 3D view.
+
+![Phantom Zone](/docs/assets/geometry/phantom_zone.png)
+
+### Collimator zone
+
+Create by subtracting the inner cylinder from the outer cylinder.
+Name it and set the material to lead.
+
+![Collimator Zone](/docs/assets/geometry/collimator_zone.png)
+
+## What's next?
+
+With the geometry defined, proceed to:
+
+- **[Beam & Physics](/docs/user-guide/beam-physics/)** — configure the particle source and physics settings
