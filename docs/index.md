@@ -17,7 +17,7 @@ For users with access to the computing resources (i.e. registered in the [PlGrid
 
 ![Demo landing page](assets/demo.png)
 
-Demo version of the platform is hosted on the GitHub pages as [yaptide.github.io](https://yaptide.github.io/web_dev).
+Demo version of the platform is hosted on the GitHub pages as [yaptide.github.io](https://yaptide.github.io).
 This version is free for use and doesn't require registration or login.
 The following functionalities are available:
 
